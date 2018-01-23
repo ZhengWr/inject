@@ -34,8 +34,17 @@ public class Neo4jKBModifier {
 		return result.queryStatistics().getNodesCreated();
 	}
 	
+	public int addConceptNode(String name) {
+		String neosql = "merge(b:概念{name:{name}})";
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("name", name);
+		Result result = sharedSession.query(neosql, params);
+		return result.queryStatistics().getNodesCreated();
+	}
+	
+	
 	public int addConceptNode(String name, String condefi) {
-		String neosql = "merge(b:概念{name:{name},condefi:{condefi}})";
+		String neosql = "merge (b:概念 {name:{name}}) on create set b.definition={condefi} on match set b.definition={condefi}";
 		HashMap<String, Object> params = new HashMap<String,Object>();
 		params.put("name", name);
 		params.put("condefi", condefi);
@@ -44,8 +53,16 @@ public class Neo4jKBModifier {
 	}
 	
 	
+	public int addCharacttNode(String name) {
+		String neosql = "merge(b:性质{name:{name}})";
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("name", name);
+		Result result = sharedSession.query(neosql, params);
+		return result.queryStatistics().getNodesCreated();
+	}
+	
 	public int addCharacttNode(String name, String chacontent) {
-		String neosql = "merge(b:性质{name:{name},chacontent:{chacontent}})";
+		String neosql = "merge (b:性质 {name:{name}}) on create set b.charactor={chacontent} on match set b.charactor={chacontent}";
 		HashMap<String, Object> params = new HashMap<String,Object>();
 		params.put("name", name);
 		params.put("chacontent", chacontent);
@@ -54,8 +71,16 @@ public class Neo4jKBModifier {
 	}
 	
 	
+	public int addTheoNode(String name) {
+		String neosql = "merge(b:定理{name:{name}})";
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("name", name);;
+		Result result = sharedSession.query(neosql, params);
+		return result.queryStatistics().getNodesCreated();
+	}
+	
 	public int addTheoNode(String name, String content) {
-		String neosql = "merge(b:定理{name:{name},content:{content}})";
+		String neosql = "merge (b:定理 {name:{name}}) on create set b.therom={content} on match set b.therom={content}";
 		HashMap<String, Object> params = new HashMap<String,Object>();
 		params.put("name", name);
 		params.put("content", content);
@@ -74,10 +99,10 @@ public class Neo4jKBModifier {
 	}
 	
 	
-	public int addChildRelation(String name1, String name2) {
+	public int addContainthRelation(String name1, String name2) {
 		String neosql = "match (b:知识点) where b.name = {name1} "
-				+"match (b2:知识点) where b2.name = {name2} "
-				+"merge (b)-[r:child]->(b2)";
+				+"match (b2:定理) where b2.name = {name2} "
+				+"merge (b)-[r:containconcept]->(b2)";
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("name1", name1);
 		params.put("name2", name2);

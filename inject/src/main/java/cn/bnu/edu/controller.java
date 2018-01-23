@@ -23,18 +23,28 @@ public class controller {
 	
 	@RequestMapping(value = "/addknowledge")
 	public  @ResponseBody String  addknowledge(@RequestParam("pointname") String pointname,
+			@RequestParam("pointfather") String pointfather,
 			@RequestParam("pointim") String pointim,
-			@RequestParam("pointdi") String pointdi){
+			@RequestParam("pointdi") String pointdi,
+			@RequestParam("contain") String contain,
+			@RequestParam("containth") String containth){
 		neo4j.addKnowledgeNode(pointname, pointim, pointdi);
+		neo4j.addConceptNode(contain);
+		neo4j.addTheoNode(containth);
+		neo4j.addFatherRelation(pointname, pointfather);
+		neo4j.addContainRelation(pointname, contain);
+		neo4j.addContainthRelation(pointname, containth);
 		return "";
 	}
 	
 			
 	
 	@RequestMapping(value = "/addconcept")
-	public  @ResponseBody String  addconcept(@RequestParam("conname") String conname,
-			@RequestParam("condefi") String condefi){
-		neo4j.addConceptNode(conname, condefi);
+	public  @ResponseBody String  addconcept(@RequestParam("conceptname") String conceptname,
+			@RequestParam("definition") String definition,
+			@RequestParam("charactor") String charactor){
+		neo4j.addCharacttNode(charactor);
+		neo4j.addConceptNode(conceptname, definition);
         return "概念页面";
 	}
 	
@@ -47,41 +57,16 @@ public class controller {
 	}
 	
 	
-	@RequestMapping(value = "/child")
-	public  @ResponseBody String  addchild(@RequestParam("child1") String child1,
-			@RequestParam("child2") String child2){
-		neo4j.addChildRelation(child1, child2);
-        return "定理页面";
-	}
-	
-	
-	@RequestMapping(value = "/father")
-	public  @ResponseBody String  addfather(@RequestParam("father1") String father1,
-			@RequestParam("father2") String father2){
-		neo4j.addFatherRelation(father1, father2);
-        return "父节点";
-	}
-	
-	
-	@RequestMapping(value = "/contain")
-	public  @ResponseBody String  addcontain(@RequestParam("contain1") String contain1,
-			@RequestParam("contain2") String contain2){
-		neo4j.addContainRelation(contain1, contain2);   
-        return "包含";
-	}
+
+		
 	
 	@RequestMapping(value = "/addtheo")
 	public  @ResponseBody String  addtheo(@RequestParam("theoname") String theoname,
 			@RequestParam("theocontent") String theocontent){
 		neo4j.addTheoNode(theoname, theocontent);  
-        return "包含";
+        return "定理";
 	}
 	
 	
-	@RequestMapping(value = "/addsolu")
-	public  @ResponseBody String  addsolu(@RequestParam("soluname") String soluname,
-			@RequestParam("solucontent") String solucontent){
-		neo4j.addSoluNode(soluname, solucontent);
-        return "方法页面";
-	}
+
 }

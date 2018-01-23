@@ -125,10 +125,7 @@
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
 							<h1 class="text-center"><span>词频分析</span></h1>
-							<p class="lead text-center">使用说明</p>
-							<p>根据导航栏中的分析类型选择所需的分析类型，输入分析条件后，点击生成查询，然后选择导航栏右侧的图示就可以看到对应的分析结果。</p>
-	                        <p>同现阈值：对核心词与其相关词语可视化时，两词同现次数的最低值设置</p>
-	                        <p>词频阈值：对核心词与其相关词语可视化时，相关词语单独出现的次数最低值设置</p>					
+							<p class="lead text-center">使用说明</p>			
 						</div>				
 					</div>
 				</div>
@@ -144,8 +141,10 @@
 	  <div role="tabpanel">
         <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-             <li role="presentation" class="active"><a href="#knowledgepoint" aria-controls="home" role="tab" data-toggle="tab">创建节点</a></li>
-             <li role="presentation"><a href="#concept" aria-controls="concept" role="tab" data-toggle="tab">知识点关系创建</a></li>
+             <li role="presentation" class="active"><a href="#knowledgepoint" aria-controls="home" role="tab" data-toggle="tab">知识点</a></li>
+             <li role="presentation"><a href="#concept" aria-controls="concept" role="tab" data-toggle="tab">概念</a></li>
+             <li role="presentation"><a href="#char" aria-controls="char" role="tab" data-toggle="tab">性质</a></li>
+             <li role="presentation"><a href="#theory" aria-controls="theory" role="tab" data-toggle="tab">定理</a></li>
             </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="height: 600px">
@@ -155,6 +154,12 @@
                   <label for="pointname" class="col-md-1 control-label">知识点名称</label>
                   <div class="col-md-2">
                   <input type="text" class="form-control" id="pointname" name="pointname" th:value="${pointname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="pointfather" class="col-md-1 control-label">父知识点名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="pointfather" name="pointfather" th:value="${pointfather}" aria-describedby="sizing-addon2"></input>
                   </div>                
                 </div>
                 <div class="form-group">
@@ -170,51 +175,77 @@
                   </div>  
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">知识点结点创建</button>
-                  </div>
-                 </div>
-               </form>
-               <form class="form-horizontal" th:action="@{/addconcept}">
-    	       <div class="form-group">
-                  <label for="conname" class="col-md-1 control-label">概念名称</label>
+                  <label for="contain" class="col-md-1 control-label">包含概念</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="conname" name="conname" th:value="${conname}" aria-describedby="sizing-addon2"></input>
-                  </div>                
-                </div>
-                <div class="form-group">
-                  <label for="condefi" class="col-md-1 control-label">概念定义</label>
-                  <div class="col-md-5">
-                  <input type="text" class="form-control" id="condefi" name="condefi" th:value="${condefi}" aria-describedby="sizing-addon2"></input>
-                  </div>                
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">概念结点创建</button>
+                  <input type="text" class="form-control" id="contain" name="contain" th:value="${contain}" aria-describedby="sizing-addon2"></input>
                   </div>
-                 </div>
-               </form>
-               <form class="form-horizontal" th:action="@{/addcharact}">
-    	       <div class="form-group">
+                </div>
+                <div class="form-group">
+                  <label for="containth" class="col-md-1 control-label">包含定理</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="containth" name="containth" th:value="${containth}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-offset-2">
+                    <button type="submit" class="btn btn-default">录入</button>
+                  </div>
+                </div>
+                </form>
+               </div><!-- tab panel -->
+               <div role="tabpanel" class="tab-pane active" id="concept" style="height: 600px">
+                <form class="form-horizontal" th:action="@{/addconcept}">
+    	         <div class="form-group">
+                  <label for="conceptname" class="col-md-1 control-label">概念名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="conceptname" name="conceptname" th:value="${conceptname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="definition" class="col-md-1 control-label">概念定义</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="definition" name="definition" th:value="${definition}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="charactor" class="col-md-1 control-label">具有性质</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="charactor" name="charactor" th:value="${charactor}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-offset-2">
+                    <button type="submit" class="btn btn-default">录入</button>
+                  </div>
+                </div>
+                </form>
+               </div><!-- tab panel -->
+               
+               <div role="tabpanel" class="tab-pane active" id="char" style="height: 600px">
+                <form class="form-horizontal" th:action="@{/addcharact}">
+    	         <div class="form-group">
                   <label for="chaname" class="col-md-1 control-label">性质名称</label>
                   <div class="col-md-2">
                   <input type="text" class="form-control" id="chaname" name="chaname" th:value="${chaname}" aria-describedby="sizing-addon2"></input>
                   </div>                
                 </div>
                 <div class="form-group">
-                  <label for="chacontent" class="col-md-1 control-label">性质内容</label>
-                  <div class="col-md-5">
+                  <label for="definition" class="col-md-1 control-label">性质内容</label>
+                  <div class="col-md-2">
                   <input type="text" class="form-control" id="chacontent" name="chacontent" th:value="${chacontent}" aria-describedby="sizing-addon2"></input>
-                  </div>  
+                  </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">性质节点创建</button>
+                  <div class="col-md-offset-2">
+                    <button type="submit" class="btn btn-default">录入</button>
                   </div>
-                 </div>
-               </form>
-               <form class="form-horizontal" th:action="@{/addtheo}">
-    	       <div class="form-group">
+                </div>
+                </form>
+               </div><!-- tab panel -->    
+               
+               <div role="tabpanel" class="tab-pane active" id="theory" style="height: 600px">
+                <form class="form-horizontal" th:action="@{/addtheo}">
+    	         <div class="form-group">
                   <label for="theoname" class="col-md-1 control-label">定理名称</label>
                   <div class="col-md-2">
                   <input type="text" class="form-control" id="theoname" name="theoname" th:value="${theoname}" aria-describedby="sizing-addon2"></input>
@@ -223,90 +254,20 @@
                 <div class="form-group">
                   <label for="theocontent" class="col-md-1 control-label">定理内容</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="theocontent" name="theocontent" th:value="${chacontent}" aria-describedby="sizing-addon2"></input>
-                  </div>  
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">定理结点创建</button>
+                  <input type="text" class="form-control" id="theocontent" name="theocontent" th:value="${theocontent}" aria-describedby="sizing-addon2"></input>
                   </div>
-                 </div>
-               </form>
-    	      <form class="form-horizontal" th:action="@{/addsolu}">
-    	       <div class="form-group">
-                  <label for="soluname" class="col-md-1 control-label">方法名称</label>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="soluname" name="soluname" th:value="${soluname}" aria-describedby="sizing-addon2"></input>
-                  </div>                
                 </div>
                 <div class="form-group">
-                  <label for="solucontent" class="col-md-1 control-label">方法涉及</label>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="solucontent" name="solucontent" th:value="${solucontent}" aria-describedby="sizing-addon2"></input>
-                  </div>  
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">方法结点创建</button>
+                  <div class="col-md-offset-2">
+                    <button type="submit" class="btn btn-default">录入</button>
                   </div>
-                 </div>
-               </form>
-            </div>
+                </div>
+                </form>
+               </div><!-- tab panel -->
+               </div><!-- tab content -->
+             </div><!-- tab panel -->
             
-                  
-            <div role="tabpanel" class="tab-pane" id="concept" style="height: 600px">
-    	      <form class="form-horizontal" th:action="@{/child}">
-    	        <div class="form-group">
-                  <label class="col-md-1 control-label">知识点与子知识点</label>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="child1" name="child1" th:value="${child1}" aria-describedby="sizing-addon2"></input>
-                  </div>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="child2" name="child2" th:value="${child2}" aria-describedby="sizing-addon2"></input>
-                  </div>
-                  <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">子知识点创建</button>
-                  </div>
-                 </div>
-                </div>
-                </form>
-                <form class="form-horizontal" th:action="@{/father}">
-    	        <div class="form-group">
-                  <label class="col-md-1 control-label">知识点与父知识点</label>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="father1" name="father1" th:value="${father1}" aria-describedby="sizing-addon2"></input>
-                  </div>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="father2" name="father2" th:value="${father2}" aria-describedby="sizing-addon2"></input>
-                  </div>
-                  <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">父知识点创建</button>
-                  </div>
-                 </div>
-                </div>
-                </form>
-                <form class="form-horizontal" th:action="@{/contain}">
-    	        <div class="form-group">
-                  <label class="col-md-1 control-label">知识点与概念</label>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="contain1" name="contain1" th:value="${contain1}" aria-describedby="sizing-addon2"></input>
-                  </div>
-                  <div class="col-md-2">
-                  <input type="text" class="form-control" id="contain2" name="contain2" th:value="${contain2}" aria-describedby="sizing-addon2"></input>
-                  </div>
-                  <div class="form-group">
-                  <div class="col-sm-offset-2 col-md-1">
-                  <button type="submit" class="btn btn-default">知识点包含概念创建</button>
-                  </div>
-                 </div>
-                </div>
-                </form>
-            </div>   
-            </div>
-        </div>
-      <!-- section graph end -->
+                
 		
 		
 		
