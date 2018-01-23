@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+.modal {
+    top:17%; /* 向上的距離*/
+    left:16%;
+    outline: none;
+}

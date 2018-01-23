@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<title>NLP</title>
+		<meta name="description" content="Worthy a Bootstrap-based, Responsive HTML5 Template" />
+		<meta name="author" content="htmlcoder.me" />
+
+		<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" th:href="@{images/favicon.ico}" />
+
+		<!-- Web Fonts -->
+		<link th:href='@{http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext}' rel='stylesheet' type='text/css' />
+		<link th:href='@{http://fonts.googleapis.com/css?family=Raleway:700,400,300}' rel='stylesheet' type='text/css' />
+
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet" />
+
+		<!-- Font Awesome CSS -->
+		<link th:href="@{fonts/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+		<!-- Plugins -->
+		<link th:href="@{css/animations.css}" rel="stylesheet" />
+
+		<!-- Worthy core CSS file -->
+		<link th:href="@{css/style.css}" rel="stylesheet" />
+
+		<!-- Custom css --> 
+		<link th:href="@{css/custom.css}" rel="stylesheet" />
+		
+		<!-- footer end -->
+
+		<!-- JavaScript files placed at the end of the document so the pages load faster
+		================================================== -->
+		<!-- Jquery and Bootstap core js files -->
+		<script type="text/javascript" th:src="@{plugins/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+
+		<!-- Modernizr javascript -->
+		<script type="text/javascript" th:src="@{plugins/modernizr.js}"></script>
+
+		<!-- Isotope javascript -->
+		<script type="text/javascript" th:src="@{plugins/isotope/isotope.pkgd.min.js}"></script>
+		
+		<!-- Backstretch javascript -->
+		<script type="text/javascript" th:src="@{plugins/jquery.backstretch.min.js}"></script>
+
+		<!-- Appear javascript -->
+		<script type="text/javascript" th:src="@{plugins/jquery.appear.js}"></script>
+
+		<!-- Initialization of Plugins -->
+		<script type="text/javascript" th:src="@{js/template.js}"></script>
+
+		<!-- Custom Scripts -->
+		<script type="text/javascript" th:src="@{js/custom.js}"></script>
+	</head>
+
+	<body class="no-trans">
+	
+		<!-- scrollToTop -->
+		<!-- ================ -->
+		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
+		<!-- header start -->
+		<!-- ================ --> 
+		<header class="header fixed clearfix navbar navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<!-- header-left start -->
+						<!-- ================ -->
+						<div class="header-left clearfix">
+							<!-- name-and-slogan -->
+							<div class="site-name-and-slogan smooth-scroll">
+								<div class="site-name"><a href="#banner">高中数学知识清单录入</a></div>
+							</div>
+						</div>
+						<!-- header-left end -->
+					</div>
+					<div class="col-md-8">	
+						<!-- header-right start -->
+						<!-- ================ -->
+						<div class="header-right clearfix">
+							<!-- main-navigation start -->
+							<!-- ================ -->
+							<div class="main-navigation animated">
+								<!-- navbar start -->
+								<!-- ================ -->
+								<nav class="navbar navbar-default" role="navigation">
+									<div class="container-fluid">
+										<!-- Toggle get grouped for better mobile display -->
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>
+									</div>
+								</nav>
+								<!-- navbar end -->
+							</div>
+							<!-- main-navigation end -->
+						</div>
+						<!-- header-right end -->
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- header end -->
+
+
+		<!-- banner start -->
+		<!-- ================ -->
+		<div id="banner" class="banner">
+			<div class="banner-image"></div>
+			<div class="banner-caption">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
+							<h1 class="text-center"><span>词频分析</span></h1>
+							<p class="lead text-center">使用说明</p>
+							<p>根据导航栏中的分析类型选择所需的分析类型，输入分析条件后，点击生成查询，然后选择导航栏右侧的图示就可以看到对应的分析结果。</p>
+	                        <p>同现阈值：对核心词与其相关词语可视化时，两词同现次数的最低值设置</p>
+	                        <p>词频阈值：对核心词与其相关词语可视化时，相关词语单独出现的次数最低值设置</p>					
+						</div>				
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- banner end -->
+
+
+
+
+
+      <!--section graph start-->
+	  <div role="tabpanel">
+        <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+             <li role="presentation" class="active"><a href="#knowledgepoint" aria-controls="home" role="tab" data-toggle="tab">创建节点</a></li>
+             <li role="presentation"><a href="#concept" aria-controls="concept" role="tab" data-toggle="tab">知识点关系创建</a></li>
+            </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="height: 600px">
+            <div role="tabpanel" class="tab-pane active" id="knowledgepoint" style="height: 600px">
+             <form class="form-horizontal" th:action="@{/addknowledge}">
+    	       <div class="form-group">
+                  <label for="pointname" class="col-md-1 control-label">知识点名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="pointname" name="pointname" th:value="${pointname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="pointim" class="col-md-1 control-label">是否重点</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="pointim" name="pointim" th:value="${pointim}" aria-describedby="sizing-addon2"></input>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <label for="pointdi" class="col-md-1 control-label">是否难点</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="pointdi" name="pointdi" th:value="${pointdi}" aria-describedby="sizing-addon2"></input>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">知识点结点创建</button>
+                  </div>
+                 </div>
+               </form>
+               <form class="form-horizontal" th:action="@{/addconcept}">
+    	       <div class="form-group">
+                  <label for="conname" class="col-md-1 control-label">概念名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="conname" name="conname" th:value="${conname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="condefi" class="col-md-1 control-label">概念定义</label>
+                  <div class="col-md-5">
+                  <input type="text" class="form-control" id="condefi" name="condefi" th:value="${condefi}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">概念结点创建</button>
+                  </div>
+                 </div>
+               </form>
+               <form class="form-horizontal" th:action="@{/addcharact}">
+    	       <div class="form-group">
+                  <label for="chaname" class="col-md-1 control-label">性质名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="chaname" name="chaname" th:value="${chaname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="chacontent" class="col-md-1 control-label">性质内容</label>
+                  <div class="col-md-5">
+                  <input type="text" class="form-control" id="chacontent" name="chacontent" th:value="${chacontent}" aria-describedby="sizing-addon2"></input>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">性质节点创建</button>
+                  </div>
+                 </div>
+               </form>
+               <form class="form-horizontal" th:action="@{/addtheo}">
+    	       <div class="form-group">
+                  <label for="theoname" class="col-md-1 control-label">定理名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="theoname" name="theoname" th:value="${theoname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="theocontent" class="col-md-1 control-label">定理内容</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="theocontent" name="theocontent" th:value="${chacontent}" aria-describedby="sizing-addon2"></input>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">定理结点创建</button>
+                  </div>
+                 </div>
+               </form>
+    	      <form class="form-horizontal" th:action="@{/addsolu}">
+    	       <div class="form-group">
+                  <label for="soluname" class="col-md-1 control-label">方法名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="soluname" name="soluname" th:value="${soluname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="solucontent" class="col-md-1 control-label">方法涉及</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="solucontent" name="solucontent" th:value="${solucontent}" aria-describedby="sizing-addon2"></input>
+                  </div>  
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">方法结点创建</button>
+                  </div>
+                 </div>
+               </form>
+            </div>
+            
+                  
+            <div role="tabpanel" class="tab-pane" id="concept" style="height: 600px">
+    	      <form class="form-horizontal" th:action="@{/child}">
+    	        <div class="form-group">
+                  <label class="col-md-1 control-label">知识点与子知识点</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="child1" name="child1" th:value="${child1}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="child2" name="child2" th:value="${child2}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                  <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">子知识点创建</button>
+                  </div>
+                 </div>
+                </div>
+                </form>
+                <form class="form-horizontal" th:action="@{/father}">
+    	        <div class="form-group">
+                  <label class="col-md-1 control-label">知识点与父知识点</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="father1" name="father1" th:value="${father1}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="father2" name="father2" th:value="${father2}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                  <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">父知识点创建</button>
+                  </div>
+                 </div>
+                </div>
+                </form>
+                <form class="form-horizontal" th:action="@{/contain}">
+    	        <div class="form-group">
+                  <label class="col-md-1 control-label">知识点与概念</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="contain1" name="contain1" th:value="${contain1}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="contain2" name="contain2" th:value="${contain2}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                  <div class="form-group">
+                  <div class="col-sm-offset-2 col-md-1">
+                  <button type="submit" class="btn btn-default">知识点包含概念创建</button>
+                  </div>
+                 </div>
+                </div>
+                </form>
+            </div>   
+            </div>
+        </div>
+      <!-- section graph end -->
+		
+		
+		
+
+	</body>
+</html>
