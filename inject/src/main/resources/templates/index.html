@@ -124,7 +124,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
-							<h1 class="text-center"><span>词频分析</span></h1>
+							<h1 class="text-center"><span>高中数学知识清单录入</span></h1>
 							<p class="lead text-center">使用说明</p>			
 						</div>				
 					</div>
@@ -136,20 +136,19 @@
 
 
 
-
+     <form class="form-horizontal" th:action="@{/addknowledge}">
       <!--section graph start-->
 	  <div role="tabpanel">
         <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
              <li role="presentation" class="active"><a href="#knowledgepoint" aria-controls="home" role="tab" data-toggle="tab">知识点</a></li>
-             <li role="presentation"><a href="#concept" aria-controls="concept" role="tab" data-toggle="tab">概念</a></li>
-             <li role="presentation"><a href="#char" aria-controls="char" role="tab" data-toggle="tab">性质</a></li>
-             <li role="presentation"><a href="#theory" aria-controls="theory" role="tab" data-toggle="tab">定理</a></li>
+             <li role="presentation"><a href="#concept" aria-controls="tab" role="tab" data-toggle="tab">概念</a></li>
+             <li role="presentation"><a href="#char" aria-controls="tab" role="tab" data-toggle="tab">性质</a></li>
+             <li role="presentation"><a href="#theory" aria-controls="tab" role="tab" data-toggle="tab">定理</a></li>
             </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="height: 600px">
             <div role="tabpanel" class="tab-pane active" id="knowledgepoint" style="height: 600px">
-             <form class="form-horizontal" th:action="@{/addknowledge}">
     	       <div class="form-group">
                   <label for="pointname" class="col-md-1 control-label">知识点名称</label>
                   <div class="col-md-2">
@@ -185,26 +184,24 @@
                   </div>  
                 </div>
                 <div class="form-group">
-                  <label for="contain" class="col-md-1 control-label">包含概念</label>
+                  <label for="conceptname" class="col-md-1 control-label">包含概念</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="contain" name="contain" th:value="${contain}" aria-describedby="sizing-addon2"></input>
-                  </div>
+                  <a href="#concept" aria-controls="concept" role="button" class="btn btn-info" data-toggle="tab">点击填写概念</a>
+                  </div>      
                 </div>
                 <div class="form-group">
-                  <label for="containth" class="col-md-1 control-label">包含定理</label>
+                  <label for="theoname" class="col-md-1 control-label">包含定理</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="containth" name="containth" th:value="${containth}" aria-describedby="sizing-addon2"></input>
+                  <a href="#theory" aria-controls="theory" role="button" class="btn btn-info" data-toggle="tab">点击填写定理</a>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-md-offset-2">
-                    <button type="submit" class="btn btn-default">录入</button>
+                    <button type="submit"  class="btn btn-default">录入</button>
                   </div>
                 </div>
-                </form>
                </div><!-- tab panel -->
-               <div role="tabpanel" class="tab-pane active" id="concept" style="height: 600px">
-                <form class="form-horizontal" th:action="@{/addconcept}">
+               <div role="tabpanel" class="tab-pane" id="concept" style="height: 600px">
     	         <div class="form-group">
                   <label for="conceptname" class="col-md-1 control-label">概念名称</label>
                   <div class="col-md-2">
@@ -220,19 +217,19 @@
                 <div class="form-group">
                   <label for="charactor" class="col-md-1 control-label">具有性质</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="charactor" name="charactor" th:value="${charactor}" aria-describedby="sizing-addon2"></input>
+                  <a href="#char" aria-controls="char" role="button" class="btn btn-info" data-toggle="tab">点击填写性质</a>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-md-offset-2">
                     <button type="submit" class="btn btn-default">录入</button>
+                    <a href="#knowledgepoint" aria-controls="knowledgepoint" role="button" class="btn btn-info" data-toggle="tab">返回知识点</a>          
+                    
                   </div>
                 </div>
-                </form>
                </div><!-- tab panel -->
                
-               <div role="tabpanel" class="tab-pane active" id="char" style="height: 600px">
-                <form class="form-horizontal" th:action="@{/addcharact}">
+               <div role="tabpanel" class="tab-pane" id="char" style="height: 600px">
     	         <div class="form-group">
                   <label for="chaname" class="col-md-1 control-label">性质名称</label>
                   <div class="col-md-2">
@@ -248,13 +245,12 @@
                 <div class="form-group">
                   <div class="col-md-offset-2">
                     <button type="submit" class="btn btn-default">录入</button>
+                    <a href="#concept" aria-controls="concept" role="button" class="btn btn-info" data-toggle="tab">返回上级</a>                    
                   </div>
                 </div>
-                </form>
                </div><!-- tab panel -->    
                
-               <div role="tabpanel" class="tab-pane active" id="theory" style="height: 600px">
-                <form class="form-horizontal" th:action="@{/addtheo}">
+               <div role="tabpanel" class="tab-pane" id="theory" style="height: 600px">
     	         <div class="form-group">
                   <label for="theoname" class="col-md-1 control-label">定理名称</label>
                   <div class="col-md-2">
@@ -270,12 +266,13 @@
                 <div class="form-group">
                   <div class="col-md-offset-2">
                     <button type="submit" class="btn btn-default">录入</button>
+                    <a href="#knowledgepoint" aria-controls="knowledgepoint" role="button" class="btn btn-info" data-toggle="tab">返回知识点</a>          
                   </div>
-                </div>
-                </form>
+                </div>   
                </div><!-- tab panel -->
                </div><!-- tab content -->
              </div><!-- tab panel -->
+            </form>
             
                 
 		

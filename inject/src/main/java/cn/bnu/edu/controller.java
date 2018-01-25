@@ -27,14 +27,44 @@ public class controller {
 			@RequestParam("pointfather") String pointfather,
 			@RequestParam("pointim") String pointim,
 			@RequestParam("pointdi") String pointdi,
-			@RequestParam("contain") String contain,
-			@RequestParam("containth") String containth){
+			@RequestParam("conceptname") String conceptname,
+			@RequestParam("definition") String definition,
+			@RequestParam("chaname") String chaname,
+			@RequestParam("chacontent") String chacontent,
+			@RequestParam("theoname") String theoname,
+			@RequestParam("theocontent") String theocontent
+			){
+		if(conceptname!=""&&definition!=""){
+		   neo4j.addConceptNode(conceptname, definition);
+		}
+		if(theoname!=""&&theocontent!=""){
+		   neo4j.addTheoNode(theoname, theocontent);
+		}
+		
+		if(conceptname!=""&&theoname!=""){
+		neo4j.addContainthRelation(conceptname, theoname);
+		}
+		
+		if(pointname!=""&&conceptname!=""){
+		neo4j.addContainRelation(pointname, conceptname);
+	     }
+		
+		if(chaname!=""&&chacontent!=""){
+		neo4j.addCharacttNode(chaname, chacontent);
+		}
+		
+		if(pointname!=""&&chaname!=""){
+		neo4j.addContainchRelation(pointname, chaname);
+		}
+		
+		if(pointname!=""&&pointim!=""&&pointdi!=""){
 		neo4j.addKnowledgeNode(pointname, pointim, pointdi);
-		neo4j.addConceptNode(contain);
-		neo4j.addTheoNode(containth);
-		neo4j.addFatherRelation(pointname, pointfather);
-		neo4j.addContainRelation(pointname, contain);
-		neo4j.addContainthRelation(pointname, containth);
+		}
+		
+		if(pointname!=""&&pointfather!=""){
+		neo4j.addFatherRelation(pointname,pointfather);
+		}
+        System.out.println(pointname+pointfather+pointim+pointdi+conceptname+definition+chaname+chacontent+theoname+theocontent);
 		return "index";
 	}
 	
