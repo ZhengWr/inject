@@ -165,13 +165,23 @@
                 <div class="form-group">
                   <label for="pointim" class="col-md-1 control-label">是否重点</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="pointim" name="pointim" th:value="${pointim}" aria-describedby="sizing-addon2"></input>
+                     <label class="checkbox-inline">
+                       <input type="radio" id="pointim1" name="pointim" th:value="是"/> 是
+                     </label>
+                     <label class="checkbox-inline">
+                       <input type="radio" id="pointim2" name="pointim" th:value="否"/> 否
+                     </label>
                   </div>  
                 </div>
                 <div class="form-group">
                   <label for="pointdi" class="col-md-1 control-label">是否难点</label>
                   <div class="col-md-2">
-                  <input type="text" class="form-control" id="pointdi" name="pointdi" th:value="${pointdi}" aria-describedby="sizing-addon2"></input>
+                     <label class="checkbox-inline">
+                       <input type="radio" id="pointdi1" name="pointdi" th:value="是"/> 是
+                     </label>
+                     <label class="checkbox-inline">
+                       <input type="radio" id="pointdi2" name="pointdi" th:value="否"/> 否
+                     </label>
                   </div>  
                 </div>
                 <div class="form-group">

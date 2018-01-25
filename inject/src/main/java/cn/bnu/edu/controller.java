@@ -1,5 +1,6 @@
 package cn.bnu.edu;
 
+import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class controller {
 	
 	
 	@RequestMapping(value = "/addknowledge")
-	public  @ResponseBody String  addknowledge(@RequestParam("pointname") String pointname,
+	public  String addknowledge(@RequestParam("pointname") String pointname,
 			@RequestParam("pointfather") String pointfather,
 			@RequestParam("pointim") String pointim,
 			@RequestParam("pointdi") String pointdi,
@@ -34,7 +35,7 @@ public class controller {
 		neo4j.addFatherRelation(pointname, pointfather);
 		neo4j.addContainRelation(pointname, contain);
 		neo4j.addContainthRelation(pointname, containth);
-		return "";
+		return "index";
 	}
 	
 			
