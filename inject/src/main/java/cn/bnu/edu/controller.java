@@ -1,6 +1,7 @@
 package cn.bnu.edu;
 
-import org.neo4j.ogm.annotation.Relationship;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +65,6 @@ public class controller {
 		if(pointname!=""&&pointfather!=""){
 		neo4j.addFatherRelation(pointname,pointfather);
 		}
-        System.out.println(pointname+pointfather+pointim+pointdi+conceptname+definition+chaname+chacontent+theoname+theocontent);
 		return "index";
 	}
 	
