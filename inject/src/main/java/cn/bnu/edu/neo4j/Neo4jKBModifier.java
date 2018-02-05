@@ -34,6 +34,37 @@ public class Neo4jKBModifier {
 		return result.queryStatistics().getNodesCreated();
 	}
 	
+	
+	public int addKnowledgeNode(String name, String isim, String isdi,String content ) {
+		String neosql = "merge(b:知识点{name:{name},isim:{isim},isdi:{isdi},content:{content}})";
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("name", name);
+		params.put("isim", isim);
+		params.put("isdi", isdi);
+		params.put("content", content);
+		Result result = sharedSession.query(neosql, params);
+		return result.queryStatistics().getNodesCreated();
+	}
+	
+	public int addMethodNode(String name, String content ) {
+		String neosql = "merge(b:方法{name:{name},content:{content}})";
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("name", name);
+		params.put("content", content);
+		Result result = sharedSession.query(neosql, params);
+		return result.queryStatistics().getNodesCreated();
+	}
+	
+	public int addMarkNode(String name, String content ) {
+		String neosql = "merge(b:符号{name:{name},content:{content}})";
+		HashMap<String, Object> params = new HashMap<String,Object>();
+		params.put("name", name);
+		params.put("content", content);
+		Result result = sharedSession.query(neosql, params);
+		return result.queryStatistics().getNodesCreated();
+	}
+	
+	
 	public int addConceptNode(String name) {
 		String neosql = "merge(b:概念{name:{name}})";
 		HashMap<String, Object> params = new HashMap<String,Object>();
@@ -109,7 +140,28 @@ public class Neo4jKBModifier {
 		Result result = sharedSession.query(neosql,params);
 		return result.queryStatistics().getRelationshipsCreated();
 	}
+	
+	public int addContainMethodRelation(String name1, String name2) {
+		String neosql = "match (b:知识点) where b.name = {name1} "
+				+"match (b2:方法) where b2.name = {name2} "
+				+"merge (b)-[r:containmethod]->(b2)";
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("name1", name1);
+		params.put("name2", name2);
+		Result result = sharedSession.query(neosql,params);
+		return result.queryStatistics().getRelationshipsCreated();
+	}
 
+	public int addContainMarkRelation(String name1, String name2) {
+		String neosql = "match (b:知识点) where b.name = {name1} "
+				+"match (b2:符号) where b2.name = {name2} "
+				+"merge (b)-[r:containmark]->(b2)";
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("name1", name1);
+		params.put("name2", name2);
+		Result result = sharedSession.query(neosql,params);
+		return result.queryStatistics().getRelationshipsCreated();
+	}
 	
 	public int addFatherRelation(String name1, String name2) {
 		String neosql = "match (b:知识点) where b.name = {name1} "
@@ -137,7 +189,7 @@ public class Neo4jKBModifier {
 	
 	
 	public int addContainchRelation(String name1, String name2) {
-		String neosql = "match (b:知识点) where b.name = {name1} "
+		String neosql = "match (b:概念) where b.name = {name1} "
 				+"match (b2:性质) where b2.name = {name2} "
 				+"merge (b)-[r:containcharactor]->(b2)";
 		HashMap<String, Object> params = new HashMap<String, Object>();

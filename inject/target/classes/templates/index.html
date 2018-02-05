@@ -61,6 +61,30 @@
 		<script type="text/javascript" th:src="@{js/custom.js}"></script>
 		
 		<script type="text/javascript">
+		   $(function(){
+		       $("#user").blur(function(){
+		        var text = $(this).val().trim();
+		        if(text == ""){
+		           $("#submit").attr({"disabled":"disabled"});
+		           $("#submit2").attr({"disabled":"disabled"});
+		           $("#submit3").attr({"disabled":"disabled"});
+		           $("#submit4").attr({"disabled":"disabled"});
+		           $("#submit5").attr({"disabled":"disabled"});
+		           $("#submit6").attr({"disabled":"disabled"});
+		        }else{
+		            $("#submit").removeAttr("disabled");
+		            $("#submit2").removeAttr("disabled");
+		            $("#submit3").removeAttr("disabled");
+		            $("#submit4").removeAttr("disabled");
+		            $("#submit5").removeAttr("disabled");
+		            $("#submit6").removeAttr("disabled");
+		            
+		          }
+		       });
+		     });
+		   function success(){
+			   alert("提交成功");
+		   }
 		   function deleteconcept(){
 			   document.getElementById("conceptname").value="";
 			   document.getElementById("definition").value="";
@@ -73,85 +97,39 @@
 			   document.getElementById("theoname").value="";
 			   document.getElementById("theocontent").value="";
 		   }
+		   function deletemethod(){
+			   document.getElementById("methodname").value="";
+			   document.getElementById("methodinfo").value="";
+		   }
+		   function deletemark(){
+			   document.getElementById("markname").value="";
+			   document.getElementById("markinfo").value="";
+		   }
 		</script>
 	</head>
 
 	<body class="no-trans">
 	
-		<!-- scrollToTop -->
-		<!-- ================ -->
-		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
-		<!-- header start -->
-		<!-- ================ --> 
-		<header class="header fixed clearfix navbar navbar-fixed-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<!-- header-left start -->
-						<!-- ================ -->
-						<div class="header-left clearfix">
-							<!-- name-and-slogan -->
-							<div class="site-name-and-slogan smooth-scroll">
-								<div class="site-name"><a href="#banner">高中数学知识清单录入</a></div>
-							</div>
-						</div>
-						<!-- header-left end -->
-					</div>
-					<div class="col-md-8">	
-						<!-- header-right start -->
-						<!-- ================ -->
-						<div class="header-right clearfix">
-							<!-- main-navigation start -->
-							<!-- ================ -->
-							<div class="main-navigation animated">
-								<!-- navbar start -->
-								<!-- ================ -->
-								<nav class="navbar navbar-default" role="navigation">
-									<div class="container-fluid">
-										<!-- Toggle get grouped for better mobile display -->
-										<div class="navbar-header">
-											<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-												<span class="sr-only">Toggle navigation</span>
-												<span class="icon-bar"></span>
-												<span class="icon-bar"></span>
-												<span class="icon-bar"></span>
-											</button>
-										</div>
-									</div>
-								</nav>
-								<!-- navbar end -->
-							</div>
-							<!-- main-navigation end -->
-						</div>
-						<!-- header-right end -->
-					</div>
-				</div>
-			</div>
-		</header>
-		<!-- header end -->
-
-
-		<!-- banner start -->
-		<!-- ================ -->
-		<div id="banner" class="banner">
-			<div class="banner-image"></div>
-			<div class="banner-caption">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
-							<h1 class="text-center"><span>高中数学知识清单录入</span></h1>
-							<p class="lead text-center">使用说明</p>			
-						</div>				
-					</div>
-				</div>
-			</div>
+   <form class="form-horizontal" th:action="@{/addknowledge}" target="nm_iframe">
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="site-name-and-slogan smooth-scroll">
+		   <div class="site-name"><a href="#banner">高中数学知识清单录入</a></div>
 		</div>
-		<!-- banner end -->
-
-
-
-
-     <form class="form-horizontal" th:action="@{/addknowledge}" target="nm_iframe">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <div class="navbar-form navbar-right" th:action="@{/addknowledge}" target="nm_iframe">
+            <a>用户名：</a>
+            <div class="form-group">
+              <input type="text" class="form-control" id="user" name="user" th:value="${user}"/>
+            </div>
+          </div>
+		</div>
+      </div>
+    </nav>
+	
+    <br/><br/><br/>
+ 
       <!--section graph start-->
 	  <div role="tabpanel">
         <!-- Nav tabs -->
@@ -160,6 +138,8 @@
              <li role="presentation"><a href="#concept" aria-controls="tab" role="tab" data-toggle="tab">概念</a></li>
              <li role="presentation"><a href="#char" aria-controls="tab" role="tab" data-toggle="tab">性质</a></li>
              <li role="presentation"><a href="#theory" aria-controls="tab" role="tab" data-toggle="tab">定理</a></li>
+             <li role="presentation"><a href="#method" aria-controls="tab" role="tab" data-toggle="tab">方法</a></li>
+             <li role="presentation"><a href="#mark" aria-controls="tab" role="tab" data-toggle="tab">符号</a></li>
             </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="height: 600px">
@@ -211,8 +191,26 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="conceptname" class="col-md-1 control-label">包含方法</label>
+                  <div class="col-md-2">
+                  <a href="#method" aria-controls="concept" role="button" class="btn btn-info" data-toggle="tab">点击填写方法</a>
+                  </div>      
+                </div>
+                <div class="form-group">
+                  <label for="conceptname" class="col-md-1 control-label">包含符号</label>
+                  <div class="col-md-2">
+                  <a href="#mark" aria-controls="concept" role="button" class="btn btn-info" data-toggle="tab">点击填写符号</a>
+                  </div>      
+                </div>
+                <div class="form-group">
+                  <label for="pointcontent" class="col-md-1 control-label">知识点内容</label>
+                  <div class="col-md-4">
+                       <textarea class="form-control" rows="5" id="content" name="content" th:value="${content}"></textarea>
+                  </div>      
+                </div>
+                <div class="form-group">
                   <div class="col-md-offset-2">
-                    <button type="submit"  class="btn btn-default">录入</button>
+                    <button type="submit" id="submit" onclick="success()" disabled="disabled" class="btn btn-default">录入</button>
                   </div>
                 </div>
                </div><!-- tab panel -->
@@ -237,12 +235,57 @@
                 </div>
                 <div class="form-group">
                   <div class="col-md-offset-2">
-                    <button type="submit" class="btn btn-default">录入</button>
-                    <a href="#knowledgepoint" onclick="deleteconcept()" role="button" id="conceptb" class="btn btn-info" data-toggle="tab">返回知识点</a>          
-                    
+                    <button type="submit" id="submit2" onclick="success()" disabled="disabled" class="btn btn-default">录入</button>
+                    <a href="#knowledgepoint" onclick="deleteconcept()" role="button" id="conceptb" class="btn btn-info" data-toggle="tab">返回知识点</a>                      
                   </div>
                 </div>
                </div><!-- tab panel -->
+               
+               
+               <div role="tabpanel" class="tab-pane" id="method" style="height: 600px">
+    	         <div class="form-group">
+                  <label for="methodname" class="col-md-1 control-label">方法名称</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="methodname" name="methodname" th:value="${methodname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="methodinfo" class="col-md-1 control-label">方法描述</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="methodinfo" name="methodinfo" th:value="${methodinfo}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-offset-2">
+                    <button type="submit" id="submit5" onclick="success()" disabled="disabled" class="btn btn-default">录入</button>
+                    <a href="#knowledgepoint" onclick="deletemethod()" role="button" id="conceptb" class="btn btn-info" data-toggle="tab">返回知识点</a>                      
+                  </div>
+                </div>
+               </div><!-- tab panel -->
+               
+               
+               
+               <div role="tabpanel" class="tab-pane" id="mark" style="height: 600px">
+    	         <div class="form-group">
+                  <label for="markname" class="col-md-1 control-label">符号</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="markname" name="markname" th:value="${markname}" aria-describedby="sizing-addon2"></input>
+                  </div>                
+                </div>
+                <div class="form-group">
+                  <label for="markinfo" class="col-md-1 control-label">符号描述</label>
+                  <div class="col-md-2">
+                  <input type="text" class="form-control" id="markinfo" name="markinfo" th:value="${markinfo}" aria-describedby="sizing-addon2"></input>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-offset-2">
+                    <button type="submit" id="submit6" onclick="success()" disabled="disabled" class="btn btn-default">录入</button>
+                    <a href="#knowledgepoint" onclick="deletemark()" role="button" id="conceptb" class="btn btn-info" data-toggle="tab">返回知识点</a>                      
+                  </div>
+                </div>
+               </div><!-- tab panel -->
+               
                
                <div role="tabpanel" class="tab-pane" id="char" style="height: 600px">
     	         <div class="form-group">
@@ -259,7 +302,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-md-offset-2">
-                    <button type="submit" class="btn btn-default">录入</button>
+                    <button type="submit" id="submit3" onclick="success()" disabled="disabled" class="btn btn-default">录入</button>
                     <a href="#concept" onclick="deletecharactor()" role="button" class="btn btn-info" data-toggle="tab">返回上级</a>                    
                   </div>
                 </div>
@@ -280,7 +323,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-md-offset-2">
-                    <button type="submit" class="btn btn-default">录入</button>
+                    <button type="submit" id="submit4" onclick="success()"  disabled="disabled" class="btn btn-default">录入</button>
                     <a href="#knowledgepoint" onclick="deletetheory()" role="button" class="btn btn-info" data-toggle="tab">返回知识点</a>          
                   </div>
                 </div>   
